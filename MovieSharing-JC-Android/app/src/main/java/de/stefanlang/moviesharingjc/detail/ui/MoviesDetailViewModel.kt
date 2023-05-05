@@ -1,4 +1,4 @@
-package de.stefanlang.moviesharingjc.detail
+package de.stefanlang.moviesharingjc.detail.ui
 
 import androidx.lifecycle.ViewModel
 import java.util.*

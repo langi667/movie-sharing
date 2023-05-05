@@ -1,4 +1,4 @@
-package de.stefanlang.moviesharingjc.detail
+package de.stefanlang.moviesharingjc.detail.ui
 
 import android.annotation.SuppressLint
 import androidx.annotation.DrawableRes
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -27,23 +26,16 @@ import java.util.*
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MoviesDetailView(viewModel: MoviesDetailViewModel) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colors.background),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start
-    ) {
-        Scaffold(topBar = { TopBar() }) {
-            Column(modifier = Modifier
+    Scaffold(topBar = { TopBar() }) {
+        Column(
+            modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(ScrollState(0))) {
-                Header(viewModel.title)
-                Text(
-                    modifier = Modifier.padding(start = Dimen.s, end = Dimen.s),
-                    text = viewModel.description
-                )
-            }
+                .background(MaterialTheme.colors.background)
+                .verticalScroll(ScrollState(0))
+        ) {
+            UpperContent(viewModel.title)
+            MainContent(viewModel.description)
+
         }
     }
 }
@@ -57,17 +49,16 @@ private fun TopBar() {
 }
 
 @Composable
-private fun Header(title: String) {
+private fun UpperContent(title: String) {
     val imageHeight = 160.dp
     val thumbnailHeight = imageHeight
 
-    val thumbnailOffset = (imageHeight.value * -0.3).dp
-    val thumbnailWidth = (thumbnailHeight.value * 0.64).dp
+    val thumbnailOffset = (imageHeight.value * -0.3).dp // moving it down 2/3 of the header image height
+    val thumbnailWidth = (thumbnailHeight.value * 0.66).dp // 2/3 ratio
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-
     ) {
         Image(
             modifier = Modifier
@@ -90,6 +81,7 @@ private fun Header(title: String) {
                 modifier = Modifier
                     .size(width = thumbnailWidth, height = thumbnailHeight),
             )
+
             Column(modifier = Modifier.padding(start = Dimen.xs)) {
                 Column(
                     modifier = Modifier
@@ -119,6 +111,14 @@ private fun Header(title: String) {
             }
         }
     }
+}
+
+@Composable
+private fun MainContent(description: String){
+    Text(
+        modifier = Modifier.padding(start = Dimen.s, end = Dimen.s),
+        text = description
+    )
 }
 
 @Composable
