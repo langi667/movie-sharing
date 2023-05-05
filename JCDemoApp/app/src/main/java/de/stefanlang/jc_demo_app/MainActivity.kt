@@ -46,8 +46,8 @@ fun AddButtonExample(viewModel: MainActivityViewModel) {
     val count = viewModel.count
 
     Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.Red), contentAlignment = Alignment.Center) {
+        .fillMaxSize(),
+        contentAlignment = Alignment.Center) {
 
         Card(Modifier.size(80.dp), shape = CircleShape, elevation = 4.dp) {
             Column(modifier = Modifier
